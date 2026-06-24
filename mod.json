@@ -8,7 +8,7 @@
 	},
 	"id": "movavi.gravitize",
 	"name": "Gravitize",
-	"version": "v1.0.0",
+	"version": "v1.0.1",
 	"developer": "MoVavi",
 	"description": "Gravitize bypasses Geometry Dash's default -2 to 2 gravity trigger clamp when a level loads.",
 	"tags": ["gameplay"]
