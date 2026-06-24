@@ -1,8 +1,6 @@
 #include <Geode/Geode.hpp>
 #include <Geode/modify/EffectGameObject.hpp>
 
-#include <cstdlib>
-
 using namespace geode::prelude;
 
 class $modify(GravitizeEffectGameObject, EffectGameObject) {
@@ -14,10 +12,11 @@ class $modify(GravitizeEffectGameObject, EffectGameObject) {
         float gravity = 1.f;
 
         if (values.size() > GRAVITY_IDX && exists.size() > GRAVITY_IDX && exists[GRAVITY_IDX]
-            && values.size() > 1 && std::atoi(values[1].c_str()) == GRAVITY_OBJECT_ID) {
-            char* end = nullptr;
-            gravity = std::strtof(values[GRAVITY_IDX].c_str(), &end);
-            restore = end != values[GRAVITY_IDX].c_str();
+            && values.size() > 1 && numFromString<int>(values[1].c_str()).unwrapOr(0) == GRAVITY_OBJECT_ID) {
+            if (auto parsed = numFromString<float>(values[GRAVITY_IDX].c_str())) {
+                gravity = parsed.unwrap();
+                restore = true;
+            }
         }
 
         EffectGameObject::customObjectSetup(values, exists);
